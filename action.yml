@@ -1,0 +1,23 @@
+name: PerfAI Action
+description: A GitHub Action that performs a specific task using a Docker Image
+author: P10-ai
+branding:
+  icon: activity
+  color: blue
+      
+inputs:
+  input_name:
+    description: Open API Spec File
+    required: true
+    default: 'https://petstore.swagger.io/v2/swagger.yaml' 
+
+runs:
+  using: 'docker'
+  image: 'ghcr.io/p10-ai/perf-engine:main'
+#   image: 'P10-ai/Perf-Engine2:main'
+
+
+# runs:
+#   using: 'docker'
+#   image: 'ghcr.io/P10-ai/Perf-Engine2:main'  
+#   image: docker://docker.pkg.github.com/P10-ai/Perf-Engine/perf-engine:latest 
