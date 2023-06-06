@@ -23,7 +23,7 @@ See [action.yml](action.yml)
 
 ```yaml
 steps:
-- uses: P10-ai/Perf-Action@v1.1
+- uses: docker://ghcr.io/p10-ai/perf-engine:main
   with:
     url: 'https://petstore.swagger.io/v2/swagger.yaml'
     basePath: 'https://petstore.swagger.io/v2'
