@@ -17,6 +17,20 @@ Deliver High-Performance APIs and achieve 3x engagement and upsell.
 ![image](https://github.com/P10-ai/Perf-Actions/assets/134328549/4c7ab821-bcff-40c8-85d8-c2dc97f8b1cc)
 
 
-## Usage
+# Usage
+
+See [action.yml](action.yml)
+
+```yaml
+steps:
+- uses: P10-ai/Perf-Action@v1.1
+  with:
+    url: 'https://petstore.swagger.io/v2/swagger.yaml'
+    basePath: 'https://petstore.swagger.io/v2'
+    authUrl: 'https://api.examica.io/auth/credentials'
+    authBody: '{"login":"tester@daniyals.ca","password":"Tester@786"}'
+```
+
+
 
 See [action.yml](https://github.com/P10-ai/Perf-Actions/blob/main/action.yml)
