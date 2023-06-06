@@ -6,14 +6,31 @@ branding:
   color: blue
       
 inputs:
-  input_name:
+  url:
     description: Open API Spec File
     required: true
-    default: 'https://petstore.swagger.io/v2/swagger.yaml' 
+  basePath:
+    description: Environment used for performance run
+    required: true
+  authType:
+    description: Auth type used for API performance.
+    required: true
+  authUrl:
+    description: Auth url
+    required: true
+  authBody:
+    description: Body used authentication
+    required: true
 
 runs:
   using: 'docker'
   image: 'ghcr.io/p10-ai/perf-engine:main'
+  args:
+    - ${{ inputs.url }}
+    - ${{ inputs.basePath }}
+    - ${{ inputs.authType }}
+    - ${{ inputs.authUrl }}
+    - ${{ inputs.authBody }}
 #   image: 'P10-ai/Perf-Engine2:main'
 
 
