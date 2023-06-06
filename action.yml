@@ -12,9 +12,6 @@ inputs:
   basePath:
     description: Environment used for performance run
     required: true
-  authType:
-    description: Auth type used for API performance.
-    required: true
   authUrl:
     description: Auth url
     required: true
