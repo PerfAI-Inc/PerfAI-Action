@@ -27,8 +27,8 @@ steps:
   with:
     url: 'https://petstore.swagger.io/v2/swagger.yaml'
     basePath: 'https://petstore.swagger.io/v2'
-    authUrl: 'https://api.examica.io/auth/credentials'
-    authBody: '{"login":"tester@daniyals.ca","password":"Tester@786"}'
+    authUrl: 'https://api.petstore.io/auth/credentials'
+    authBody: '{"login":"your-username","password":"your-password"}'
 ```
 
 
