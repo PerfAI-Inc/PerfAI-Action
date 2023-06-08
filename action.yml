@@ -18,6 +18,10 @@ inputs:
   authBody:
     description: Body used authentication
     required: true
+    
+outputs:
+  report:
+    description: Display performance report
 
 runs:
   using: 'docker'
