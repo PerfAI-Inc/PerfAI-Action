@@ -31,10 +31,4 @@ runs:
     - ${{ inputs.apiBasePath }}
     - ${{ inputs.authUrl }}
     - ${{ inputs.authBody }}
-#   image: 'P10-ai/Perf-Engine2:main'
-
-
-# runs:
-#   using: 'docker'
-#   image: 'ghcr.io/P10-ai/Perf-Engine2:main'  
-#   image: docker://docker.pkg.github.com/P10-ai/Perf-Engine/perf-engine:latest 
+    
