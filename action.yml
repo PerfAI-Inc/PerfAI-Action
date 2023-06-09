@@ -6,17 +6,17 @@ branding:
   color: blue
       
 inputs:
-  url:
+  apiSpecURL:
     description: Open API Spec File
     required: true
-  basePath:
+  apiBasePath:
     description: Environment used for performance run
     required: true
   authUrl:
     description: Auth url
     required: true
   authBody:
-    description: Body used authentication
+    description: Body for authentication endpoint
     required: true
     
 outputs:
@@ -27,8 +27,8 @@ runs:
   using: 'docker'
   image: 'docker://ghcr.io/p10-ai/perf-engine:main'
   args:
-    - ${{ inputs.url }}
-    - ${{ inputs.basePath }}
+    - ${{ inputs.apiSpecURL }}
+    - ${{ inputs.apiBasePath }}
     - ${{ inputs.authUrl }}
     - ${{ inputs.authBody }}
 #   image: 'P10-ai/Perf-Engine2:main'
