@@ -25,8 +25,8 @@ See [action.yml](action.yml)
 steps:
 - uses: docker://ghcr.io/p10-ai/perf-engine:main
   with:
-    url: 'https://petstore.swagger.io/v2/swagger.yaml'
-    basePath: 'https://petstore.swagger.io/v2'
+    apiSpecURL: 'https://petstore.swagger.io/v2/swagger.yaml'
+    apiBasePath: 'https://petstore.swagger.io/v2'
     authUrl: 'https://api.petstore.io/auth/credentials'
     authBody: '{"login":"your-username","password":"your-password"}'
 ```
