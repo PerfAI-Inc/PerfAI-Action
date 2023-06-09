@@ -16,6 +16,7 @@ Deliver High-Performance APIs and achieve 3x engagement and upsell.
 
 ![image](https://github.com/P10-ai/Perf-Actions/assets/134328549/4c7ab821-bcff-40c8-85d8-c2dc97f8b1cc)
 
+## 
 
 # Usage
 
@@ -25,12 +26,21 @@ See [action.yml](action.yml)
 steps:
 - uses: docker://ghcr.io/p10-ai/perf-engine:main
   with:
+  
     apiSpecURL: 'https://petstore.swagger.io/v2/swagger.yaml'
+    This is a sample URL pointing to the location where the API specification document 
+    (e.g., in OpenAPI or Swagger format) can be found.
+    
     apiBasePath: 'https://petstore.swagger.io/v2'
+    This represents the base path of an API, indicating that all endpoints related to product 
+    operations would be appended to this base path.
+  
     authUrl: 'https://api.petstore.io/auth/credentials'
+    This is an example URL for the authentication service, where users are redirected to 
+    log in and obtain authentication credentials.
+    
     authBody: '{"login":"your-username","password":"your-password"}'
+    This is a sample JSON object representing the body of an authentication request. 
+    It contains the username and password of the user attempting to authenticate.
+    
 ```
-
-
-
-See [action.yml](https://github.com/P10-ai/Perf-Actions/blob/main/action.yml)
