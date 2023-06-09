@@ -24,7 +24,7 @@ See [action.yml](action.yml)
 
 ```yaml
 steps:
-- uses: docker://ghcr.io/p10-ai/perf-engine:main
+- uses: docker://ghcr.io/perfai-inc/perfai-engine:main
   with:
   
     apiSpecURL: 'https://petstore.swagger.io/v2/swagger.yaml'
