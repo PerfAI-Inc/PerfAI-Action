@@ -1,6 +1,6 @@
-name: PerfAI, Inc.
+name: PerfAI Action
 description: A GitHub Action that performs a specific task using a Docker Image
-author: P10-ai
+author: PerfAI, Inc.
 branding:
   icon: activity
   color: blue
@@ -25,7 +25,7 @@ outputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/p10-ai/perf-engine:main'
+  image: 'docker://ghcr.io/perfai-inc/perfai-engine:main'
   args:
     - ${{ inputs.apiSpecURL }}
     - ${{ inputs.apiBasePath }}
