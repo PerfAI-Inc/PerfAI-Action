@@ -14,8 +14,6 @@ Deliver High-Performance APIs and achieve 3x engagement and upsell.
 
 **Active Performance** - PerfAI is delivered as a GitHub Action. It enables shift-left and continuous performance validation. 
 
-![image](https://github.com/P10-ai/Perf-Actions/assets/134328549/4c7ab821-bcff-40c8-85d8-c2dc97f8b1cc)
-
 ## 
 
 # Usage
@@ -44,3 +42,9 @@ steps:
     It contains the username and password of the user attempting to authenticate.
     
 ```
+
+# Output Logs
+
+![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/134328549/ef753274-d972-46e3-912d-84cec151ddf9)
+
+
