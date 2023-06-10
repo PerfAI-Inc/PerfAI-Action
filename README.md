@@ -1,25 +1,26 @@
 
 # PerfAI
 
-PerfAI is a new kind of a active performance platform. It supports all kinds of APIs including public, private, mobile, & web.
+PerfAI is an innovative active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities..
 
-Deliver High-Performance APIs and achieve 3x engagement and upsell.
 
-## 
+
 
 ## How PerfAI Works
 
-**No Engineering Required** - No code and no data is required. PerfAI automatically learns your API and creates its own data.
+PerfAI is built on four fundamental principles:
 
-**Performance Top 10** - PerfAI creates a custom performance plan for your APIs based on industry's first performance top 10 list. 
+1. No Engineering Effort Required: PerfAI eliminates the need for coding or data input. It autonomously learns your entire API and generates its own data.
 
-**Simplified Scoring** - No complex graphs or CSV files to deal with. Instead get a simplified score for your entire API. 
+2. Performance Top 10 Coverage: Save valuable time by avoiding the laborious task of creating a performance plan. PerfAI develops a comprehensive and tailored performance plan based on the industry's first performance top-10 list.
 
-**Active Performance** - PerfAI is delivered as a GitHub Action. It enables shift-left and continuous performance validation. 
+3. Simplified Scoring & Reporting: Say goodbye to complex graphs and CSV files. PerfAI provides a simplified score for your entire API, along with a list of underperforming endpoints.
 
-## 
+4. Active Performance: Delivered as a GitHub Action, PerfAI facilitates shift-left and continuous performance validation. It actively identifies poorly performing critical paths as your developers write and update code.
 
-# How to guide
+
+
+# Let's get started
 
 See [action.yml](action.yml)
 
