@@ -1,8 +1,11 @@
-# PerfAI Action
+
+# PerfAI
 
 PerfAI is a new kind of a active performance platform. It supports all kinds of APIs including public, private, mobile, & web.
 
 Deliver High-Performance APIs and achieve 3x engagement and upsell.
+
+## 
 
 ## How PerfAI Works
 
@@ -16,7 +19,7 @@ Deliver High-Performance APIs and achieve 3x engagement and upsell.
 
 ## 
 
-# Usage
+# How to guide
 
 See [action.yml](action.yml)
 
