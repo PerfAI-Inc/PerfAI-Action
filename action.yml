@@ -27,11 +27,7 @@ outputs:
     description: Displays performance report
 
 runs:
-  using: 'docker'
-  image: 'docker://ghcr.io/perfai-inc/perfai-engine:main'
-  args:
-    - ${{ inputs.apiSpecURL }}
-    - ${{ inputs.apiBasePath }}
-    - ${{ inputs.authUrl }}
-    - ${{ inputs.authBody }}
-    
+  using: "composite"
+  steps:
+    - run: docker run --rm -t -e apiSpecURL=${{ inputs.apiSpecURL }} -e apiBasePath=${{ inputs.apiBasePath }} -e authUrl=${{ inputs.authUrl }} -e authBody=${{ inputs.authBody }} -e licenseKey=${{ inputs.licenseKey }} ghcr.io/perfai-inc/perfai-engine:main
+      shell: bash
