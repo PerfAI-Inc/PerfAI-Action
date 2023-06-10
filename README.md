@@ -44,6 +44,9 @@ steps:
     authBody: '{"login":"your-username","password":"your-password"}'
     This is a sample JSON object representing the body of an authentication request. 
     It contains the username and password of the user attempting to authenticate.
+
+    licenseKey: 'your-license-key'
+    A code or token that allows the user to identify him/herself as a legal customer, and it is optional.
     
 ```
 

@@ -18,6 +18,9 @@ inputs:
   authBody:
     description: Authentication Body JSON/Data
     required: true
+  licenseKey:
+    description: A code or token that allows the user to identify him/herself as a legal customer 
+    required: false
     
 outputs:
   report:
