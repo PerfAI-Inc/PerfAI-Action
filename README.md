@@ -1,6 +1,6 @@
 # PerfAI Action
 
-PerfAI is an AI-driven Performance Action for APIs & Modern Apps.  It deliver high-performance APIs/apps to enable an improved customer engagement.  It monitor marketing campaigns, and analyze user analytics.  
+PerfAI is a new kind of a active performance platform. It supports all kinds of APIs including public, private, mobile, & web.
 
 Deliver High-Performance APIs and achieve 3x engagement and upsell.
 
