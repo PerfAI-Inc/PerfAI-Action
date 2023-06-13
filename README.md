@@ -48,6 +48,9 @@ steps:
     licenseKey: 'your-license-key'
     A code or token that allows the user to identify him/herself as a legal customer, and it is optional.
     
+    [Terms of Use](https://www.perfai.ai/terms-of-use)
+    [Privacy Policy](https://www.perfai.ai/privacy-policy)
+    
 ```
 
 # Output Logs
