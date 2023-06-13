@@ -6,6 +6,7 @@ PerfAI is an innovative active performance platform that supports a wide range o
 
 ## [FAQ](https://www.perfai.ai/contact)
 ## [Pricing](https://www.perfai.ai/pricing)
+![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)
 ![screenshot of pricing plans.](file:///Users/intesarmohammed/Desktop/Screenshot%202023-06-12%20at%209.56.05%20PM.png)
 
 ## How PerfAI Works
