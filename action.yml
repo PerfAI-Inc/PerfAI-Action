@@ -2,8 +2,8 @@ name: PerfAI Actions
 description: Active Performance for APIs (public, mobile, & web)
 author: PerfAI, Inc.
 branding:
-  icon: activity
-  color: blue
+  icon: trending-up
+  color: red
       
 inputs:
   apiSpecURL:
