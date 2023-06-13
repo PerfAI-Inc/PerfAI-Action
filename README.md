@@ -52,6 +52,6 @@ steps:
 
 # Output Logs
 
-![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/134328549/ef753274-d972-46e3-912d-84cec151ddf9)
+![image](https://lh5.googleusercontent.com/4WE6geJfYky9qH93P681EqYm9rhYood4r3neQsb2Y1ueu5dlZwWvZyw4WvVEYHwvxY6047C_adcYd5aSJ-HY1nd2FDHwk1j_EJ6uZ1iBNcKd5g_LH6DB5rpC6vLXgoZWfxsWO_CNXXuZlcEdJX7bgKk)
 
 
