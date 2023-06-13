@@ -6,7 +6,7 @@ PerfAI is an innovative active performance platform that supports a wide range o
 
 ## [FAQ](https://www.perfai.ai/contact)
 ## [Pricing](https://www.perfai.ai/pricing)
-![screenshot of pricing plans.](file:///Users/intesarmohammed/Desktop/Screenshot%202023-06-12%20at%209.56.05%20PM.png)
+![screenshot of pricing plans.](<img width="927" alt="Screenshot 2023-06-12 at 9 56 05 PM" src="https://github.com/PerfAI-Inc/PerfAI-Action/assets/990419/b9a72a56-c053-40ae-a266-5aba3538890d">)
 
 ## How PerfAI Works
 
