@@ -4,7 +4,8 @@
 PerfAI is an innovative active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities..
 
 
-
+[FAQ] (https://www.perfai.ai/contact)
+[Pricing] (https://www.perfai.ai/pricing)
 
 ## How PerfAI Works
 
@@ -47,7 +48,8 @@ steps:
 
     licenseKey: 'your-license-key'
     A code or token that allows the user to identify him/herself as a legal customer, and it is optional.
-    
+   
+   
     [Terms of Use](https://www.perfai.ai/terms-of-use)
     [Privacy Policy](https://www.perfai.ai/privacy-policy)
     
