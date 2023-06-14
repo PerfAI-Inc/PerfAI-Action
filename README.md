@@ -47,6 +47,16 @@ steps:
     This is a sample JSON object representing the body of an authentication request. 
     It contains the username and password of the user attempting to authenticate.
 
+    authHeaders: 'Authorization: Basic <Base64EncodedCredentials>' 
+    Sample headers
+    Bearer token "Authorization: Bearer <AccessToken>" 
+    API Key "Authorization: APIKey <APIKey>"
+    HMAC (Hash-based Message Authentication Code) Authentication "Authorization: HMAC <APIKey>:<Signature>"
+    JSON Web Token (JWT) Authentication "Authorization: Bearer <JWT>"
+    Cookie Header "Cookie: sessionID=abc123; userID=12345"
+    Session Header "Session: 1234567890abcdef"
+    Auth headers can be included in the HTTP request's Authorization header field to authenticate and authorize the client making the API request. The specific header and authentication method used will depend on the API and authentication mechanism being implemented.
+
     licenseKey: 'your-license-key'
     A code or token that allows the user to identify him/herself as a legal customer, and it is optional.
    
