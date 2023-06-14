@@ -31,5 +31,5 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: docker run --rm -e apiSpecURL=${{ inputs.apiSpecURL }} -e apiBasePath=${{ inputs.apiBasePath }} -e authUrl=${{ inputs.authUrl }} -e authBody=${{ inputs.authBody }} -e headers=${{ inputs.authHeaders }} -e licenseKey=${{ inputs.licenseKey }} ghcr.io/perfai-inc/perfai-engine:main
+    - run: docker run --rm -e apiSpecURL=${{ inputs.apiSpecURL }} -e apiBasePath=${{ inputs.apiBasePath }} -e authUrl=${{ inputs.authUrl }} -e authBody=${{ inputs.authBody }} -e authHeaders=${{ inputs.authHeaders }} -e licenseKey=${{ inputs.licenseKey }} ghcr.io/perfai-inc/perfai-engine:main
       shell: bash
