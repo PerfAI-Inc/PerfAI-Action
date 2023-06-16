@@ -3,6 +3,18 @@
 
 PerfAI is an active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities.
 
+## How PerfAI Works
+
+PerfAI is built on four fundamental principles:
+
+1. No Engineering Effort Required: PerfAI eliminates the need for coding or data input. It autonomously learns your entire API and generates its own data.
+
+2. Performance Top 10 Coverage: Save valuable time by avoiding the laborious task of creating a performance plan. PerfAI develops a comprehensive and tailored performance plan based on the industry's first performance top-10 list.
+
+3. Simplified Scoring & Reporting: Say goodbye to complex graphs and CSV files. PerfAI provides a simplified score for your entire API, along with a list of underperforming endpoints.
+
+4. Active Performance: Delivered as a GitHub Action, PerfAI facilitates shift-left and continuous performance validation. It actively identifies poorly performing critical paths as your developers write and update code.
+
 
 ## Frequently Asked Questions
 - [Read here](https://www.perfai.ai/pricing#FAQ)
@@ -20,21 +32,6 @@ PerfAI is an active performance platform that supports a wide range of APIs, inc
 
 ## Case studies & blogs
 - [Recent case studies, read here](https://www.perfai.ai/blog)
-
-
-
-## How PerfAI Works
-
-PerfAI is built on four fundamental principles:
-
-1. No Engineering Effort Required: PerfAI eliminates the need for coding or data input. It autonomously learns your entire API and generates its own data.
-
-2. Performance Top 10 Coverage: Save valuable time by avoiding the laborious task of creating a performance plan. PerfAI develops a comprehensive and tailored performance plan based on the industry's first performance top-10 list.
-
-3. Simplified Scoring & Reporting: Say goodbye to complex graphs and CSV files. PerfAI provides a simplified score for your entire API, along with a list of underperforming endpoints.
-
-4. Active Performance: Delivered as a GitHub Action, PerfAI facilitates shift-left and continuous performance validation. It actively identifies poorly performing critical paths as your developers write and update code.
-
 
 
 # Let's get started
