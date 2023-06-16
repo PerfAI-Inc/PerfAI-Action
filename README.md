@@ -1,11 +1,16 @@
 
 # PerfAI
 
-PerfAI is an innovative active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities..
+PerfAI is an active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities.
 
 
-## [FAQ](https://www.perfai.ai/contact)
+## [FAQ](https://www.perfai.ai/faq)
+
 ## [Pricing](https://www.perfai.ai/pricing)
+- Request a demo
+- Free Developer license available
+- Startup friendly pricing
+- Request Custom quotes 
 
 
 ## How PerfAI Works
