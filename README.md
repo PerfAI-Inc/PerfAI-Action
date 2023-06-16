@@ -7,7 +7,7 @@ PerfAI is an active performance platform that supports a wide range of APIs, inc
 - [Read here](https://www.perfai.ai/pricing#FAQ)
 
 ## Request a demo
-- [Here](https://www.perfai.ai/demo))
+- [Here](https://www.perfai.ai/demo)
 
 ## Pricing
 - [Free Developer license available](https://www.perfai.ai/pricing)
