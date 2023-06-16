@@ -33,6 +33,10 @@ PerfAI is built on four fundamental principles:
 ## Case studies & blogs
 - [Recent case studies, read here](https://www.perfai.ai/blog)
 
+## Open Source Contributions / Hiring
+- If you're interested in solving active performance and AI-driven automation, please email us at opensource@perfai.ai.
+- If you're interested in joining us full-time, we are constantly looking for problem solvers. Email us your LinkedIn profile at hiring@perfai.ai.
+
 
 # Let's get started
 
