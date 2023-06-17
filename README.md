@@ -21,7 +21,7 @@ PerfAI is built on four fundamental principles:
 
 
 ## Request a demo
-- [Here](https://www.perfai.ai/demo)
+- [See a live demo](https://www.perfai.ai/demo)
 
 
 ## Pricing
