@@ -20,8 +20,9 @@ PerfAI is built on four fundamental principles:
 - [Read here](https://www.perfai.ai/pricing#FAQ)
 
 
-## Request a demo
-- [See a live demo](https://www.perfai.ai/demo)
+## Request a Demo
+- [Talk to our team](https://www.perfai.ai/demo)
+- [Request a Free POC](https://www.perfai.ai/demo)
 
 
 ## Pricing
@@ -30,7 +31,7 @@ PerfAI is built on four fundamental principles:
 - [Request Custom quotes](https://www.perfai.ai/pricing)
 
 
-## Case studies & blogs
+## Case Studies & Blogs
 - [Recent case studies, read here](https://www.perfai.ai/blog)
 
 ## Open Source Contributions / Hiring
