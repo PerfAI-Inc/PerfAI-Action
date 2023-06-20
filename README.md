@@ -1,19 +1,21 @@
 
 # PerfAI
 
+AI-powered Active Performance. Unleash High-performance APIs for 3x User Engagement and Upsell.
+
 PerfAI is an active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities.
 
 ## How PerfAI Works
 
 PerfAI is built on four fundamental principles:
 
-1. No Engineering Effort Required: PerfAI eliminates the need for coding or data input. It autonomously learns your entire API and generates its own data.
+1. No Code / No Config: PerfAI's innovative approach eliminates the need for coding, configuration, and extensive engineering efforts. It harnesses the power of AI to autonomously learn API flows and generate appropriate request data, enabling efficient and effective active performance for APIs.
 
-2. Performance Top 10 Coverage: Save valuable time by avoiding the laborious task of creating a performance plan. PerfAI develops a comprehensive and tailored performance plan based on the industry's first performance top-10 list.
+2. Performance Top-10 Coverage: PerfAI introduces a groundbreaking concept in API performance with its industry-first Performance Top-10 List. This feature revolutionizes the way API flows are validated, ensuring comprehensive and accurate performance coverage.
 
-3. Simplified Scoring & Reporting: Say goodbye to complex graphs and CSV files. PerfAI provides a simplified score for your entire API, along with a list of underperforming endpoints.
+3. Simplified Scoring: PerfAI simplifies the process of interpreting and understanding API performance results through its simplified scoring system. With PerfAI, you no longer need to navigate complex graphs or analyze CSV files to assess the performance of your API.
 
-4. Active Performance: Delivered as a GitHub Action, PerfAI facilitates shift-left and continuous performance validation. It actively identifies poorly performing critical paths as your developers write and update code.
+4. Shift-Left & CI/CD: PerfAI brings the concept of Shift-Left to API active performance by seamlessly integrating with popular development tools such as GitHub Actions and CI/CD marketplaces. This integration enables you to incorporate performance early in the development cycle, ensuring that performance issues are identified and addressed proactively.
 
 
 ## Frequently Asked Questions
