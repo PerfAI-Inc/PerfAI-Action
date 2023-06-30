@@ -87,6 +87,10 @@ steps:
 
 # Output Logs
 
-![image](https://lh5.googleusercontent.com/4WE6geJfYky9qH93P681EqYm9rhYood4r3neQsb2Y1ueu5dlZwWvZyw4WvVEYHwvxY6047C_adcYd5aSJ-HY1nd2FDHwk1j_EJ6uZ1iBNcKd5g_LH6DB5rpC6vLXgoZWfxsWO_CNXXuZlcEdJX7bgKk)
+![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/990419/59887d0a-2044-449c-af83-29cc8541d165)
+
+![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/990419/07a7f532-e301-46b8-a19c-68bba7651c30)
+
+
 
 
