@@ -89,7 +89,7 @@ steps:
 
 ![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/990419/59887d0a-2044-449c-af83-29cc8541d165)
 
-![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/990419/07a7f532-e301-46b8-a19c-68bba7651c30)
+![image](https://github.com/PerfAI-Inc/PerfAI-Action/assets/990419/a0e27a9b-a7c4-4167-8efe-b0329e723f8d)
 
 
 
