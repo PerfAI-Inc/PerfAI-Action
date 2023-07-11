@@ -26,11 +26,11 @@ PerfAI is built on four fundamental principles:
 ## Pricing
 - [Free Community Edition license available](https://www.perfai.ai/pricing)
 - [Try 7-Days Free](https://www.perfai.ai/pricing)
-- [Request Custom quotes](https://www.perfai.ai/pricing)
+- [Request Custom quote](https://www.perfai.ai/pricing)
 
 
 ## Case Studies & Blogs
-- [Recent case studies, read here](https://www.perfai.ai/blog)
+- [Recent case studies](https://www.perfai.ai/blog)
 
 ## Open Source Contributions / Hiring
 - If you're interested in solving active performance and AI-driven automation, please email us at opensource@perfai.ai.
