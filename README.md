@@ -18,18 +18,14 @@ PerfAI is built on four fundamental principles:
 4. Shift-Left & CI/CD: PerfAI brings the concept of Shift-Left to API active performance by seamlessly integrating with popular development tools such as GitHub Actions and CI/CD marketplaces. This integration enables you to incorporate performance early in the development cycle, ensuring that performance issues are identified and addressed proactively.
 
 
-## Frequently Asked Questions
-- [Read here](https://www.perfai.ai/pricing#FAQ)
-
-
-## Request a Demo
-- [Talk to our team](https://www.perfai.ai/demo)
-- [Request a Free POC](https://www.perfai.ai/demo)
+## Important Links
+- [FAQs](https://www.perfai.ai/faq)
+- [Request a Demo](https://www.perfai.ai/request-a-demo)
 
 
 ## Pricing
-- [Free Developer license available](https://www.perfai.ai/pricing)
-- [Startup friendly pricing](https://www.perfai.ai/pricing)
+- [Free Community Edition license available](https://www.perfai.ai/pricing)
+- [Try 7-Days Free](https://www.perfai.ai/pricing)
 - [Request Custom quotes](https://www.perfai.ai/pricing)
 
 
