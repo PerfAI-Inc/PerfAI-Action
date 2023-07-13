@@ -1,7 +1,7 @@
 
 # PerfAI
 
-AI-powered Active Performance. Unleash High-performance APIs for 3x User Engagement and Upsell.
+AI-Powered API Performance Testing. Deliver high-performance APIs/Apps that your customers will love and achieve a 3x upsell.
 
 PerfAI is an active performance platform that supports a wide range of APIs, including public, private, mobile, and web APIs. By leveraging PerfAI, you can deliver high-performance APIs, resulting in reduced churn, 3x higher user engagement, and increased upsell opportunities.
 
