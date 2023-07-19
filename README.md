@@ -38,22 +38,23 @@ steps:
   with:
   
     apiSpecURL: 'https://petstore.swagger.io/v2/swagger.yaml'
-    This is a sample URL pointing to the location where the API specification document 
+    (Required) This is a sample URL pointing to the location where the API specification document 
     (e.g., in OpenAPI or Swagger format) can be found.
     
     apiBasePath: 'https://petstore.swagger.io/v2'
-    This represents the base path of an API, indicating that all endpoints related to product 
+    (Optional) This represents the base path of an API, indicating that all endpoints related to product 
     operations would be appended to this base path.
   
     authUrl: 'https://api.petstore.io/auth/credentials'
-    This is an example URL for the authentication service, where users are redirected to 
+    (Recommended/Required) This is an example URL for the authentication service, where users are redirected to 
     log in and obtain authentication credentials.
     
     authBody: '{"login":"your-username","password":"your-password"}'
-    This is a sample JSON object representing the body of an authentication request. 
+    (Recommended/Required) This is a sample JSON object representing the body of an authentication request. 
     It contains the username and password of the user attempting to authenticate.
 
-    authHeaders: 'Authorization: Basic <Base64EncodedCredentials>' 
+    authHeaders: 'Authorization: Basic <Base64EncodedCredentials>'
+    (Not-Recommended)
     Sample headers
     Bearer token "Authorization: Bearer <AccessToken>" 
     API Key "Authorization: APIKey <APIKey>"
@@ -63,7 +64,8 @@ steps:
     Session Header "Session: 1234567890abcdef"
     Auth headers can be included in the HTTP request's Authorization header field to authenticate and authorize the client making the API request. The specific header and authentication method used will depend on the API and authentication mechanism being implemented.
 
-    licenseKey: 'your-license-key'
+    licenseKey: 'COMMUNITY_EDITION'
+    (Optional)
     A code or token that allows the user to identify him/herself as a legal customer, and it is optional.
    
    
