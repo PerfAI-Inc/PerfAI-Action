@@ -44,7 +44,7 @@ steps:
     licenseKey: '<your-license-key>' 
 ```
 
-**Input Details:**
+**Input Parameter Details:**
 
 1.	**apiSpecURL**: Required
 2.	**apiBasePath**: Recommended but optional
@@ -54,6 +54,15 @@ steps:
 6.	**licenseKey**: 'your-license-key' (Provided by PerfAI)
 
 **Example (using petstore.io) and Definitions:**
+
+```yaml
+apiSpecURL: ' https://petstore.swagger.io/v2/swagger.yaml'
+apiBasePath: 'https://petstore.swagger.io/v2'
+authUrl: 'https://api.petstore.io/auth/credentials'
+authBody: '{"login":"your-username","password":"your-password"}'
+authHeaders: '< >'
+licenseKey: 'your-license-key'
+```
 
 
 1.	**apiSpecURL**: 'https://petstore.swagger.io/v2/swagger.yaml'
