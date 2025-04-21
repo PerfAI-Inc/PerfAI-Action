@@ -132,7 +132,7 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
 
     STATUS="PROCESSING"
 
-    ### Step 4: Poll the status of the AI run until completion ###
+### Step 4: Poll the status of the AI run until completion ###
     while [[ "$STATUS" == "PROCESSING" ]]; do
         
         # Check the status of the API Privacy Tests
@@ -192,6 +192,73 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
       exit 1
     fi
   done
+
+### Step 5: Vulnerablilites ###
+vulnerabilities=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/sensitive-data-service/apps/issues?app_id=$APP_ID&page=1&pageSize=1" \
+--header "Authorization: Bearer $ACCESS_TOKEN")
+sarif_output=$(cat <<EOF
+{
+  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Custom Vulnerability Scanner",
+          "version": "1.0",
+          "informationUri": "https://example.com/tool-info",
+          "rules": [
+            {
+              "id": "API-DP9-2024",
+              "name": "Bot Data Modification",
+              "shortDescription": {
+                "text": "This rule identifies API endpoints vulnerable to bot data modification."
+              },
+              "fullDescription": {
+                "text": "Bot Data Modification vulnerabilities occur when an API endpoint allows unauthorized data modification by automated systems."
+              },
+              "helpUri": "https://example.com/rules/API-DP9-2024",
+              "defaultConfiguration": {
+                "level": "error"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "API-DP9-2024",
+          "level": "error",
+          "message": {
+            "text": "Vulnerability Report: Bot Data Modification on POST /user Endpoint."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "user",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+EOF
+)
+
+# Print the SARIF formatted vulnerabilities
+echo "Vulnerabilities SARIF: $sarif_output"
+
+# Write SARIF data to the specified output file
+echo "$sarif_output" >> "$GITHUB_WORKSPACE/$OUTPUT_FILENAME"
+
     
     # Once the status is no longer "in_progress", assume it completed
   echo "API Privacy Tests for API ID $APP_ID has completed successfully!"
