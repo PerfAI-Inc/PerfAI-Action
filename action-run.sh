@@ -194,7 +194,7 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
   done
 
 ### Step 5: Vulnerablilites ###
-vulnerabilities=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/sensitive-data-service/apps/issues?app_id=$APP_ID&page=1&pageSize=1" \
+vulnerabilities=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/sensitive-data-service/apps/app_issues_security?app_id=$APP_ID&page=1&pageSize=20" \
 --header "Authorization: Bearer $ACCESS_TOKEN")
 sarif_output=$(cat <<EOF
 {
