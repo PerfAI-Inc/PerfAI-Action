@@ -6,30 +6,59 @@ branding:
   color: red
       
 inputs:
-  apiSpecURL:
-    description: OpenAPI-Specification/Swagger URL
+  username:
+    description: 'PerfAI Username'
     required: true
-  apiBasePath:
-    description: API Base Path
+  password:
+    description: 'PerfAI Password'
     required: true
-  authUrl:
-    description: Token Authentication URL
+  openApiUrl:
+    description: 'OpenAPI Specification/Swagger/Bulk/Zip URLs'
     required: true
-  authBody:
-    description: Authentication Body JSON/Data
+  basePath:
+    description: 'Server base path for the API'
     required: true
-  authHeaders:
-    description: Authentication Headers
-  licenseKey:
-    description: A code or token that allows the user to identify him/herself as a legal customer 
+  appId:
+    description: 'API Id generated for PerfAI'
+    required: true
+  label:
+    description: 'API label name'
+    required: true
+  wait-for-completion:
+    description: 'To wait till PerfAI tests complete, set to `true`'
     required: false
-    
-outputs:
-  report:
-    description: Displays performance report
+    default: "true"
+  fail-on-new-leaks:
+    description: 'To fail the build on new leaks introduced with this commit, set to `true`.'
+    required: false
+    default: "false"
+  authenticationUrl1:
+    description: 'Authentication URL for Test Account 1'
+    required: false
+  authenticationBody1:
+    description: 'Authentication body for Test Account 1'
+    required: false   
+  authorizationHeaders1:
+    description: 'Authorization headers for authentication 1' 
+    required: false
+  authenticationUrl2:
+    description: 'Authentication URL for Test Account 2'
+    required: false
+  authenticationBody2:
+    description: 'Authentication body for Test Account 2'
+    required: false
+  authorizationHeaders2:
+    description: 'Authorization headers for authentication 2'
+    required: false  
 
 runs:
   using: "composite"
   steps:
-    - run: docker run --rm -e apiSpecURL=${{ inputs.apiSpecURL }} -e apiBasePath=${{ inputs.apiBasePath }} -e authUrl=${{ inputs.authUrl }} -e authBody=${{ inputs.authBody }} -e authHeaders=${{ inputs.authHeaders }} -e licenseKey=${{ inputs.licenseKey }} -v ${{ github.workspace }}/.github:/app/.github ghcr.io/perfai-inc/perfai-engine:main
+    - name: Grant execute permission for action-run.sh
+      run: chmod +x ${GITHUB_ACTION_PATH}/action-run.sh
+      shell: bash
+      
+    - name: Run action-run.sh
+      run: |
+        ${GITHUB_ACTION_PATH}/action-run.sh --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}" --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
       shell: bash
