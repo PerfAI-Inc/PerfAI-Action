@@ -150,10 +150,10 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
         # Extract fields with default values to handle null cas
         PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')
         SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security')
-        GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance')
-        VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')
-        RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')
-        CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract')
+        # GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance')
+        # VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')
+        # RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')
+        # CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract')
         
         # Set STATUS to "PROCESSING" if PRIVACY status is null or empty
         STATUS=$(echo "$PRIVACY" | jq -r '.status')
@@ -176,10 +176,10 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
               echo "Build failed with new issues." 
               echo "Complete Privacy Status: $PRIVACY"
               echo "Complete Security Status: $SECURITY"
-              echo "Complete Governance Status $GOVERNANCE"
-              echo "Complete Version Status: $VERSION"
-              echo "Complete Release Status: $RELEASE"
-              echo "Complete Contract Status: $CONTRACT"
+              # echo "Complete Governance Status $GOVERNANCE"
+              # echo "Complete Version Status: $VERSION"
+              # echo "Complete Release Status: $RELEASE"
+              # echo "Complete Contract Status: $CONTRACT"
             exit 1
          fi
     fi 
@@ -192,72 +192,6 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
       exit 1
     fi
   done
-
-### Step 5: Vulnerablilites ###
-vulnerabilities=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/sensitive-data-service/apps/app_issues_security?app_id=$APP_ID&page=1&pageSize=20" \
---header "Authorization: Bearer $ACCESS_TOKEN")
-sarif_output=$(cat <<EOF
-{
-  "$schema": "https://json.schemastore.org/sarif-2.1.0.json",
-  "version": "2.1.0",
-  "runs": [
-    {
-      "tool": {
-        "driver": {
-          "name": "Custom Vulnerability Scanner",
-          "version": "1.0",
-          "informationUri": "https://example.com/tool-info",
-          "rules": [
-            {
-              "id": "API-DP9-2024",
-              "name": "Bot Data Modification",
-              "shortDescription": {
-                "text": "This rule identifies API endpoints vulnerable to bot data modification."
-              },
-              "fullDescription": {
-                "text": "Bot Data Modification vulnerabilities occur when an API endpoint allows unauthorized data modification by automated systems."
-              },
-              "helpUri": "https://example.com/rules/API-DP9-2024",
-              "defaultConfiguration": {
-                "level": "error"
-              }
-            }
-          ]
-        }
-      },
-      "results": [
-        {
-          "ruleId": "API-DP9-2024",
-          "level": "error",
-          "message": {
-            "text": "Vulnerability Report: Bot Data Modification on POST /user Endpoint."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "user",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 1
-                }
-              }
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-EOF
-)
-
-# Print the SARIF formatted vulnerabilities
-echo "Vulnerabilities SARIF: $sarif_output"
-
-# Write SARIF data to the specified output file
-echo "$sarif_output" >> "$GITHUB_WORKSPACE/$OUTPUT_FILENAME"
 
     
     # Once the status is no longer "in_progress", assume it completed
