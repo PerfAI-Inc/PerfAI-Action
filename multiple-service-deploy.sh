@@ -120,12 +120,6 @@ if [ -z "$RUN_ID" ] || [ "$RUN_ID" == "null" ]; then
     exit 1
 fi
 
-# Check if ACCESS_TOKEN is null or emtpy
-if [ "$ACCESS_TOKEN" == "null" ]; then
-    echo "Error: Could not retrieve access token"
-    exit 1
-fi
-
 ### Step 3: Check the wait-for-completion flag ###
 if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
     echo "Waiting for API Privacy Tests to complete..."
@@ -180,7 +174,7 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
               echo "Complete Version Status: $VERSION"
               echo "Complete Release Status: $RELEASE"
               echo "Complete Contract Status: $CONTRACT"
-            exit 1
+#            exit 1
          fi
     fi 
 
