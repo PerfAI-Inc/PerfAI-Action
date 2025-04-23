@@ -70,7 +70,7 @@ RUN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/a
   -H "Authorization: Bearer $ACCESS_TOKEN" \
   -d "{
     \"appId\": \"${APP_ID}\",
-    \"services\": [\"PRIVACY\",\"GOVERNANCE\",\"VERSION\",\"SECURITY\",\"RELEASE\",\"CONTRACT\"],
+    \"services\": [\"PRIVACY\",\"SECURITY\"],
     \"label\": \"${LABEL}\",
     \"openApiUrl\": \"${OPENAPI_URL}\",
     \"basePath\": \"${BASE_PATH}\",
