@@ -63,13 +63,6 @@ echo " "
 COMMIT_ID=${GITHUB_SHA}
 COMMIT_DATE=$(date "+%F")
 COMMIT_URL="https://github.com/${GITHUB_REPOSITORY}/commit/${COMMIT_ID}"
-#COMMENT="${{ github.event.head_commit.message }}"  # Fetch commit message
-
-# Print commit information to confirm
-# echo "Commit ID: $COMMIT_ID"
-# echo "Commit Date: $COMMIT_DATE"
-# echo "Commit URL: $COMMIT_URL"
-#echo "Commit Message: $COMMENT"
 
 ### Step 2: Schedule API Privacy Tests ###
 RUN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/api-catalog/apps/schedule-run-multiple" \
@@ -107,7 +100,6 @@ RUN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/a
 ### RUN_ID Prints ###
 RUN_ID=$(echo "$RUN_RESPONSE" | jq -r '.runId')
 
-
 # Output Run Response ###
 echo " "
 echo "Run Response: $RUN_RESPONSE"
@@ -117,12 +109,6 @@ echo "Run ID is: $RUN_ID"
 # Check if RUN_ID is null or empty
 if [ -z "$RUN_ID" ] || [ "$RUN_ID" == "null" ]; then
     echo "API Privacy Tests triggered. Run ID: $RUN_ID. Exiting without waiting for completion."
-    exit 1
-fi
-
-# Check if ACCESS_TOKEN is null or emtpy
-if [ "$ACCESS_TOKEN" == "null" ]; then
-    echo "Error: Could not retrieve access token"
     exit 1
 fi
 
@@ -150,10 +136,6 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
         # Extract fields with default values to handle null cas
         PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')
         SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security')
-        # GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance')
-        # VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')
-        # RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')
-        # CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract')
         
         # Set STATUS to "PROCESSING" if PRIVACY status is null or empty
         STATUS=$(echo "$PRIVACY" | jq -r '.status')
@@ -176,10 +158,6 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
               echo "Build failed with new issues." 
               echo "Complete Privacy Status: $PRIVACY"
               echo "Complete Security Status: $SECURITY"
-              # echo "Complete Governance Status $GOVERNANCE"
-              # echo "Complete Version Status: $VERSION"
-              # echo "Complete Release Status: $RELEASE"
-              # echo "Complete Contract Status: $CONTRACT"
             exit 1
          fi
     fi 
@@ -192,7 +170,6 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
       exit 1
     fi
   done
-
     
     # Once the status is no longer "in_progress", assume it completed
   echo "API Privacy Tests for API ID $APP_ID has completed successfully!"
