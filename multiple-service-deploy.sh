@@ -174,7 +174,7 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
               echo "Complete Version Status: $VERSION"
               echo "Complete Release Status: $RELEASE"
               echo "Complete Contract Status: $CONTRACT"
-#            exit 1
+            exit 1
          fi
     fi 
 
