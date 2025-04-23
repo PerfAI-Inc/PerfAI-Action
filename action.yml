@@ -1,6 +1,7 @@
 name: PerfAI Actions
 description: Active Performance for APIs (public, mobile, & web)
 author: PerfAI, Inc.
+
 branding:
   icon: trending-up
   color: red
@@ -49,16 +50,19 @@ inputs:
     required: false
   authorizationHeaders2:
     description: 'Authorization headers for authentication 2'
-    required: false  
+    required: false 
+  validation-script:
+    description: 'Validation script to run (design-validation.sh, security-validation.sh, contract-validation.sh)'
+    required: true  
 
 runs:
   using: "composite"
   steps:
-    - name: Grant execute permission for action-run.sh
-      run: chmod +x ${GITHUB_ACTION_PATH}/multiple-service-deploy.sh
+    - name: Grant execute permission for script
+      run: chmod +x ${GITHUB_ACTION_PATH}/${{ inputs.validation-script }}
       shell: bash
       
-    - name: Run multiple-service-deploy.sh
+    - name: Run validation script
       run: |
-        ${GITHUB_ACTION_PATH}/multiple-service-deploy.sh --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}" --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
+        ${GITHUB_ACTION_PATH}/${{ inputs.validation-script }} --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}" --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
       shell: bash
