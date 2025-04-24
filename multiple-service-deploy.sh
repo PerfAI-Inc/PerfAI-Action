@@ -74,6 +74,7 @@ COMMIT_URL="https://github.com/${GITHUB_REPOSITORY}/commit/${COMMIT_ID}"
 
 ### Step 2: Schedule API Privacy Tests ###
 RUN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/api-catalog/apps/schedule-run-multiple" \
+  -H "x-org-id: 6737a7c70ebb315038419eda" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
   -d "{
