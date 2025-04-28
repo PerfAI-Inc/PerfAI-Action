@@ -121,42 +121,50 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
         echo "Current Status: $STATUS"
 
         if [ "$STATUS" = "COMPLETED" ]; then
-            echo "Run completed. Checking for issues..."
+    echo "Run completed. Checking for issues..."
 
-            NEW_ISSUES=$(echo "$PRIVACY" | jq -r '.newIssues[]?.title')
+    NEW_ISSUES=$(echo "$PRIVACY" | jq -r '.newIssues[]?.title')
 
-            if [ -n "$NEW_ISSUES" ]; then
-                echo "New issues detected. Creating GitHub Issues..."
-            else
-                echo "No issues detected. Still creating dummy GitHub issue because it is required."
-            fi
+    if [ -n "$NEW_ISSUES" ]; then
+        echo "New issues detected. Creating GitHub Issues..."
 
-            # Loop through all issues (even if empty)
-            for TITLE in $NEW_ISSUES; do
-                if [ -z "$TITLE" ]; then
-                    TITLE="Dummy Issue Title - No actual issues detected."
-                fi
+        for TITLE in $NEW_ISSUES; do
+            echo "Creating GitHub Issue: $TITLE"
 
-                echo "Creating GitHub Issue: $TITLE"
+            ISSUE_BODY="Detected during API privacy testing.\n\nIssue: $TITLE\n\nAuto-created by CI/CD script."
 
-                ISSUE_BODY="Detected during API privacy testing.\n\nIssue: $TITLE\n\nAuto-created by CI/CD script."
+            curl -s -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues" \
+              -H "Authorization: token ${PAT_TOKEN}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d "$(jq -n --arg title "$TITLE" --arg body "$ISSUE_BODY" '{title: $title, body: $body}')" \
+              > /dev/null
 
-                curl -s -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues" \
-                  -H "Authorization: token ${PAT_TOKEN}" \
-                  -H "Accept: application/vnd.github.v3+json" \
-                  -d "$(jq -n --arg title "$TITLE" --arg body "$ISSUE_BODY" '{title: $title, body: $body}')" \
-                  > /dev/null
+            echo "Issue created: $TITLE"
+        done
 
-                echo "Issue created: $TITLE"
-            done
+    else
+        echo "No issues detected. Still creating dummy GitHub issue because it is required."
 
-            echo "Finished creating GitHub issues."
+        TITLE="Dummy Issue Title - No actual issues detected."
+
+        ISSUE_BODY="No issues were found during API privacy testing.\n\nAuto-created by CI/CD script."
+
+        curl -s -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues" \
+          -H "Authorization: token ${PAT_TOKEN}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d "$(jq -n --arg title "$TITLE" --arg body "$ISSUE_BODY" '{title: $title, body: $body}')" \
+          > /dev/null
+
+        echo "Dummy Issue created: $TITLE"
+    fi
+
+        echo "Finished creating GitHub issues."
+
         elif [ "$STATUS" = "FAILED" ]; then
             echo "Error: API Privacy run failed."
             exit 1
-        fi
+    fi
 
-        sleep 10  # Wait before polling again
     done
 
     echo "API Privacy Tests completed successfully."
