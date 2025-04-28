@@ -118,7 +118,7 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
         PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')
         STATUS=$(echo "$PRIVACY" | jq -r '.status')
 
-        echo "Current Status: $STATUS"
+        # echo "Current Status: $STATUS"
 
         if [ "$STATUS" = "COMPLETED" ]; then
     echo "Run completed. Checking for issues..."
