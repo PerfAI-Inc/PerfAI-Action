@@ -123,8 +123,11 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
         if [ "$STATUS" = "COMPLETED" ]; then
     echo "Run completed. Checking for issues..."
 
-    NEW_ISSUES=$(echo "$PRIVACY" | jq -r '.newIssues[]?.title')
+    NEW_ISSUES=$(echo "$PRIVACY" | jq -r '.newIssues[]?.label')
 
+    # remove this
+    echo "NEW_ISSUES: $NEW_ISSUES"
+    # remove this
     if [ -n "$NEW_ISSUES" ]; then
         echo "New issues detected. Creating GitHub Issues..."
 
