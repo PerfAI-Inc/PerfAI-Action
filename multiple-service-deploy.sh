@@ -131,7 +131,7 @@ if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
     if [ -n "$NEW_ISSUES" ]; then
         echo "New issues detected. Creating GitHub Issues..."
 
-        for TITLE in $NEW_ISSUES; do
+       echo "$NEW_ISSUES" | while IFS= read -r TITLE; do
             echo "Creating GitHub Issue: $TITLE"
 
             ISSUE_BODY="Detected during API privacy testing.\n\nIssue: $TITLE\n\nAuto-created by CI/CD script."
