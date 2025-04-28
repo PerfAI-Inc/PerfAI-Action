@@ -16,6 +16,9 @@ inputs:
   openApiUrl:
     description: 'OpenAPI Specification/Swagger/Bulk/Zip URLs'
     required: true
+  gitHubToken:
+    description: 'GitHub Personal Access Token'
+    required: true
   basePath:
     description: 'Server base path for the API'
     required: true
@@ -61,5 +64,5 @@ runs:
       
     - name: Run multiple-service-deploy.sh
       run: |
-        ${GITHUB_ACTION_PATH}/multiple-service-deploy.sh --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}" --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
+        ${GITHUB_ACTION_PATH}/multiple-service-deploy.sh --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}"  --gitHubToken "${{ inputs.gitHubToken }}"  --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
       shell: bash
