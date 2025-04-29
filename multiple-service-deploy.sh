@@ -5,65 +5,76 @@ WAIT_FOR_COMPLETION=false
 FAIL_ON_NEW_LEAKS=false
 
 # Parse the input arguments
-TEMP=$(getopt -n "$0" -a -l "hostname:,username:,password:,openApiUrl:,gitHubToken:,basePath:,appId:,label:,wait-for-completion:,fail-on-new-leaks:,authenticationUrl1:,authenticationBody1:,authorizationHeaders1:,authenticationUrl2:,authenticationBody2:,authorizationHeaders2:" -- -- "$@")
+TEMP=$(getopt -n "$0" -a -l "hostname:,username:,password:,openApiUrl:,basePath:,appId:,label:,wait-for-completion:,fail-on-new-leaks:,authenticationUrl1:,authenticationBody1:,authorizationHeaders1:,authenticationUrl2:,authenticationBody2:,authorizationHeaders2:" -- -- "$@")
 
 [ $? -eq 0 ] || exit
 
 eval set -- "$TEMP"
 
-while [ $# -gt 0 ]; do
+while [ $# -gt 0 ]
+do
     case "$1" in
-        --hostname) PERFAI_HOSTNAME="$2"; shift ;;
-        --username) PERFAI_USERNAME="$2"; shift ;;
-        --password) PERFAI_PASSWORD="$2"; shift ;;
-        --openApiUrl) OPENAPI_URL="$2"; shift ;;
-        --gitHubToken) PAT_TOKEN="$2"; shift ;;
-        --basePath) BASE_PATH="$2"; shift ;;
-        --appId) APP_ID="$2"; shift ;;
-        --label) LABEL="$2"; shift ;;
-        --wait-for-completion) WAIT_FOR_COMPLETION="$2"; shift ;;
-        --fail-on-new-leaks) FAIL_ON_NEW_LEAKS="$2"; shift ;;
-        --authenticationUrl1) AUTH_URL_1="$2"; shift ;;
-        --authenticationBody1) AUTH_BODY_1="$2"; shift ;;
-        --authorizationHeaders1) AUTH_HEADERS_1="$2"; shift ;;
-        --authenticationUrl2) AUTH_URL_2="$2"; shift ;;
-        --authenticationBody2) AUTH_BODY_2="$2"; shift ;;
-        --authorizationHeaders2) AUTH_HEADERS_2="$2"; shift ;;
+        --hostname) PERFAI_HOSTNAME="$2"; shift;;
+        --username) PERFAI_USERNAME="$2"; shift;;
+        --password) PERFAI_PASSWORD="$2"; shift;;
+        --openApiUrl) OPENAPI_URL="$2"; shift;;
+        --basePath) BASE_PATH="$2"; shift;;        
+        --appId) APP_ID="$2"; shift;;
+        --label) LABEL="$2"; shift;;
+        --wait-for-completion) WAIT_FOR_COMPLETION="$2"; shift;;
+        --fail-on-new-leaks) FAIL_ON_NEW_LEAKS="$2"; shift;;
+        --authenticationUrl1) AUTH_URL_1="$2"; shift;;
+        --authenticationBody1) AUTH_BODY_1="$2"; shift;;
+        --authorizationHeaders1) AUTH_HEADERS_1="$2"; shift;;
+        --authenticationUrl2) AUTH_URL_2="$2"; shift;;
+        --authenticationBody2) AUTH_BODY_2="$2"; shift;;
+        --authorizationHeaders2) AUTH_HEADERS_2="$2"; shift;;
         --) shift ;;
     esac
-    shift
+    shift;
 done
 
-if [ -z "$PERFAI_HOSTNAME" ]; then
-    PERFAI_HOSTNAME="https://app.apiprivacy.com"
+echo " "
+
+if [ "$PERFAI_HOSTNAME" = "" ];
+then
+PERFAI_HOSTNAME="https://app.apiprivacy.com"
 fi
 
-### Step 1: Get Access Token ###
+### Step 1: Print Access Token ###
 TOKEN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/auth/token" \
---header "x-org-id: 6737a7c70ebb315038419eda" \
+--header "x-org-id: 66ec7391dbabc44fa27422f1" \
 --header "Content-Type: application/json" \
 --data-raw "{
     \"username\": \"${PERFAI_USERNAME}\",
     \"password\": \"${PERFAI_PASSWORD}\"
 }")
 
-ACCESS_TOKEN=$(echo "$TOKEN_RESPONSE" | jq -r '.id_token')
+ACCESS_TOKEN=$(echo $TOKEN_RESPONSE | jq -r '.id_token')
 
-if [ -z "$ACCESS_TOKEN" ] || [ "$ACCESS_TOKEN" = "null" ]; then
+if [ -z "$ACCESS_TOKEN" ]; then
     echo "Error: Could not retrieve access token"
     exit 1
 fi
 
-echo "Access Token retrieved successfully."
+echo "Access Token is: $ACCESS_TOKEN"
+echo " "
 
-# Commit information
+# Get commit information
 COMMIT_ID=${GITHUB_SHA}
 COMMIT_DATE=$(date "+%F")
 COMMIT_URL="https://github.com/${GITHUB_REPOSITORY}/commit/${COMMIT_ID}"
+#COMMENT="${{ github.event.head_commit.message }}"  # Fetch commit message
+
+# Print commit information to confirm
+# echo "Commit ID: $COMMIT_ID"
+# echo "Commit Date: $COMMIT_DATE"
+# echo "Commit URL: $COMMIT_URL"
+#echo "Commit Message: $COMMENT"
 
 ### Step 2: Schedule API Privacy Tests ###
 RUN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/api-catalog/apps/schedule-run-multiple" \
-  -H "x-org-id: 6737a7c70ebb315038419eda" \
+  -H "x-org-id: 66ec7391dbabc44fa27422f1" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
   -d "{
@@ -87,90 +98,102 @@ RUN_RESPONSE=$(curl -s --location --request POST "https://api.perfai.ai/api/v1/a
         \"commitUrl\": \"${COMMIT_URL}\",
         \"commitUsername\": \"${GITHUB_ACTOR}\",
         \"commitDate\": \"${COMMIT_DATE}\",
-        \"repoName\": \"${GITHUB_REPOSITORY}\"
+        \"repoName\": \"${GITHUB_REPOSITORY}\",
+        \"comment\": \"${COMMENT}\"
     }
-  }")
+  }"
+)
 
+#echo "Run Response: $RUN_RESPONSE"
+
+### RUN_ID Prints ###
 RUN_ID=$(echo "$RUN_RESPONSE" | jq -r '.runId')
 
-if [ -z "$RUN_ID" ] || [ "$RUN_ID" = "null" ]; then
-    echo "Failed to schedule API Privacy Tests."
+
+# Output Run Response ###
+echo " "
+echo "Run Response: $RUN_RESPONSE"
+echo " "
+echo "Run ID is: $RUN_ID"
+
+# Check if RUN_ID is null or empty
+if [ -z "$RUN_ID" ] || [ "$RUN_ID" == "null" ]; then
+    echo "API Privacy Tests triggered. Run ID: $RUN_ID. Exiting without waiting for completion."
     exit 1
 fi
 
-echo "Run ID is: $RUN_ID"
-
-### Step 3: Wait for completion if needed ###
+### Step 3: Check the wait-for-completion flag ###
 if [ "$WAIT_FOR_COMPLETION" == "false" ]; then
     echo "Waiting for API Privacy Tests to complete..."
+
     STATUS="PROCESSING"
 
-    while [ "$STATUS" = "PROCESSING" ]; do
+### Step 4: Poll the status of the AI run until completion ###
+    while [[ "$STATUS" == "PROCESSING" ]]; do
+        
+        # Check the status of the API Privacy Tests
         STATUS_RESPONSE=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/api-catalog/apps/all_service_run_status?run_id=$RUN_ID" \
-          -H "x-org-id: 6737a7c70ebb315038419eda" \
-          -H "Authorization: Bearer $ACCESS_TOKEN")
+          --header "x-org-id: 66ec7391dbabc44fa27422f1" \
+          --header "Authorization: Bearer $ACCESS_TOKEN")    
 
-        if [ -z "$STATUS_RESPONSE" ] || [ "$STATUS_RESPONSE" = "null" ]; then
-            echo "Error: Received empty response from API."
+      # Handle empty or null STATUS_RESPONSE
+        if [ -z "$STATUS_RESPONSE" ] || [ "$STATUS_RESPONSE" == "null" ]; then
+            echo "Error: Received empty response from the API."
             exit 1
         fi
-
+       
+       # echo $STATUS_RESPONSE
+    
+        # Extract fields with default values to handle null cas
         PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')
+        SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security')
+        GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance')
+        VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')
+        RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')
+        CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract')
+        
+        # Set STATUS to "PROCESSING" if PRIVACY status is null or empty
         STATUS=$(echo "$PRIVACY" | jq -r '.status')
 
-        # echo "Current Status: $STATUS"
+        # echo "status: $STATUS"
+        # echo " "
+        
+        # Check if STATUS is completed and handle issues
+        if  [ "$STATUS" == "COMPLETED"  ]; then
 
-        if [ "$STATUS" = "COMPLETED" ]; then
-    echo "Run completed. Checking for issues..."
+            NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
+            NEW_ISSUES_DETECTED=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssuesDetected')
+          
+            echo " "
+            echo "AI Running Status: $STATUS"
 
-    NEW_ISSUES=$(echo "$PRIVACY" | jq -r '.newIssues[]?.label')
+            if [ -z "$NEW_ISSUES" ] ||  [ "$NEW_ISSUES" == null ]; then
+              echo "No new issues detected. Build passed."
+          else
+              echo "Build failed with new issues." 
+              echo "Complete Privacy Status: $PRIVACY"
+              echo "Complete Security Status: $SECURITY"
+              echo "Complete Governance Status $GOVERNANCE"
+              echo "Complete Version Status: $VERSION"
+              echo "Complete Release Status: $RELEASE"
+              echo "Complete Contract Status: $CONTRACT"
+#            exit 1
+         fi
+    fi 
 
-    # remove this
-    echo "NEW_ISSUES: $NEW_ISSUES"
-    # remove this
-    if [ -n "$NEW_ISSUES" ]; then
-        echo "New issues detected. Creating GitHub Issues..."
+   # echo "AI Running Status: $STATUS"
 
-       echo "$NEW_ISSUES" | while IFS= read -r TITLE; do
-            echo "Creating GitHub Issue: $TITLE"
-
-            ISSUE_BODY="Detected during API privacy testing.\n\nIssue: $TITLE\n\nAuto-created by CI/CD script."
-
-            curl -s -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues" \
-              -H "Authorization: token ${PAT_TOKEN}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              -d "$(jq -n --arg title "$TITLE" --arg body "$ISSUE_BODY" '{title: $title, body: $body}')" \
-              > /dev/null
-
-            echo "Issue created: $TITLE"
-        done
-
-    else
-        echo "No issues detected. Still creating dummy GitHub issue because it is required."
-
-        TITLE="Dummy Issue Title - No actual issues detected."
-
-        ISSUE_BODY="No issues were found during API privacy testing.\n\nAuto-created by CI/CD script."
-
-        curl -s -X POST "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues" \
-          -H "Authorization: token ${PAT_TOKEN}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          -d "$(jq -n --arg title "$TITLE" --arg body "$ISSUE_BODY" '{title: $title, body: $body}')" \
-          > /dev/null
-
-        echo "Dummy Issue created: $TITLE"
+    # If the AI run fails, exit with an error
+    if [[ "$STATUS" == "FAILED" ]]; then
+      echo "Error: API Privacy failed for Run ID $RUN_ID"
+      exit 1
     fi
+  done
 
-        echo "Finished creating GitHub issues."
-
-        elif [ "$STATUS" = "FAILED" ]; then
-            echo "Error: API Privacy run failed."
-            exit 1
-    fi
-
-    done
-
-    echo "API Privacy Tests completed successfully."
+    
+    # Once the status is no longer "in_progress", assume it completed
+  echo "API Privacy Tests for API ID $APP_ID has completed successfully!"
 else
-    echo "Tests triggered. Not waiting for completion."
+  echo "API Privacy Tests triggered. Run ID: $RUN_ID. Exiting without waiting for completion."
+  exit 1  
 fi
