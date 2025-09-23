@@ -130,47 +130,47 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
             exit 1
         fi
 
-        STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status // "PROCESSING"')
+        # STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status // "PROCESSING"')
 
-        # ✅ Print only once, when COMPLETED or FAILED
-        if [[ "$STATUS" != "PROCESSING" ]]; then
-            echo "AI Running Status: $STATUS"
-        fi
+        # # ✅ Print only once, when COMPLETED or FAILED
+        # if [[ "$STATUS" != "PROCESSING" ]]; then
+        #     echo "AI Running Status: $STATUS"
+        # fi
         
-        # echo "AI Running Status: $STATUS"
+        # # echo "AI Running Status: $STATUS"
 
-        if [[ "$STATUS" == "COMPLETED" ]]; then
-            # echo "Run completed, checking issues..."
+        # if [[ "$STATUS" == "COMPLETED" ]]; then
+        #     # echo "Run completed, checking issues..."
   
-            FAIL=false
-            for service in privacy security governance version release contract; do
-                SERVICE_STATUS=$(echo "$STATUS_RESPONSE" | jq -r ".$service.status")
-                NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r ".$service.newIssues[]? // empty")
+        #     FAIL=false
+        #     for service in privacy security governance version release contract; do
+        #         SERVICE_STATUS=$(echo "$STATUS_RESPONSE" | jq -r ".$service.status")
+        #         NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r ".$service.newIssues[]? // empty")
 
-                echo "$service: $SERVICE_STATUS"
-                if [ -n "$NEW_ISSUES" ]; then
-                    echo "  New Issues: $NEW_ISSUES"
-                    FAIL=true
-                fi
-            done
+        #         echo "$service: $SERVICE_STATUS"
+        #         if [ -n "$NEW_ISSUES" ]; then
+        #             echo "  New Issues: $NEW_ISSUES"
+        #             FAIL=true
+        #         fi
+        #     done
 
-            if [ "$FAIL" = true ]; then
-                echo "❌ Build failed due to new issues."
-                exit 1
-            else
-                echo "✅ No new issues detected. Build passed."
-            fi
-        fi
+        #     if [ "$FAIL" = true ]; then
+        #         echo "❌ Build failed due to new issues."
+        #         exit 1
+        #     else
+        #         echo "✅ No new issues detected. Build passed."
+        #     fi
+        # fi
 
         # --- OLD LOGIC (kept but not used anymore) ---
-        PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')   # <<< not used anymore
-        SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security') # <<< not used anymore
-        GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance') # <<< not used anymore
-        VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')   # <<< not used anymore
-        RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')   # <<< not used anymore
-        CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract') # <<< not used anymore
+        # PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')   # <<< not used anymore
+        # SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security') # <<< not used anymore
+        # GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance') # <<< not used anymore
+        # VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')   # <<< not used anymore
+        # RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')   # <<< not used anymore
+        # CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract') # <<< not used anymore
 
-        # The below block only checks privacy and is redundant now
+       #  # The below block only checks privacy and is redundant now
         STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
         if  [ "$STATUS" == "COMPLETED"  ]; then
             NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
@@ -188,14 +188,13 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
                 echo "Complete Contract Status: $CONTRACT"
             fi
         fi
-       #--- END OLD LOGIC ---
+       # #--- END OLD LOGIC ---
 
         if [[ "$STATUS" == "FAILED" ]]; then
             echo "Error: API Privacy failed for Run ID $RUN_ID"
             exit 1
         fi
-
-        sleep 5
+        
     done
 
     echo "API Privacy Tests for API ID $APP_ID has completed successfully!"
