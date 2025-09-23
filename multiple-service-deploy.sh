@@ -170,7 +170,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')   # <<< not used anymore
         CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract') # <<< not used anymore
 
-        The below block only checks privacy and is redundant now
+        # The below block only checks privacy and is redundant now
         STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
         if  [ "$STATUS" == "COMPLETED"  ]; then
             NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
@@ -188,7 +188,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
                 echo "Complete Contract Status: $CONTRACT"
             fi
         fi
-        --- END OLD LOGIC ---
+       #--- END OLD LOGIC ---
 
         if [[ "$STATUS" == "FAILED" ]]; then
             echo "Error: API Privacy failed for Run ID $RUN_ID"
