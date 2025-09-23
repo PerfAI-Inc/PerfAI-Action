@@ -131,7 +131,13 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         fi
 
         STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status // "PROCESSING"')
-        echo "AI Running Status: $STATUS"
+
+        # ✅ Print only once, when COMPLETED or FAILED
+        if [[ "$STATUS" != "PROCESSING" ]]; then
+            echo "AI Running Status: $STATUS"
+        fi
+        
+        # echo "AI Running Status: $STATUS"
 
         if [[ "$STATUS" == "COMPLETED" ]]; then
             echo "Run completed, checking issues..."
@@ -189,7 +195,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
             exit 1
         fi
 
-        sleep 10
+        sleep 5
     done
 
     echo "API Privacy Tests for API ID $APP_ID has completed successfully!"
