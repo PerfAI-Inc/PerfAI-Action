@@ -140,7 +140,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         # echo "AI Running Status: $STATUS"
 
         if [[ "$STATUS" == "COMPLETED" ]]; then
-            echo "Run completed, checking issues..."
+            # echo "Run completed, checking issues..."
   
             FAIL=false
             for service in privacy security governance version release contract; do
@@ -170,25 +170,25 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')   # <<< not used anymore
         CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract') # <<< not used anymore
 
-        # The below block only checks privacy and is redundant now
-        # STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
-        # if  [ "$STATUS" == "COMPLETED"  ]; then
-        #     NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
-        #     echo " "
-        #     echo "AI Running Status: $STATUS"
-        #     if [ -z "$NEW_ISSUES" ] ||  [ "$NEW_ISSUES" == null ]; then
-        #         echo "No new issues detected. Build passed."
-        #     else
-        #         echo "Build failed with new issues." 
-        #         echo "Complete Privacy Status: $PRIVACY"
-        #         echo "Complete Security Status: $SECURITY"
-        #         echo "Complete Governance Status $GOVERNANCE"
-        #         echo "Complete Version Status: $VERSION"
-        #         echo "Complete Release Status: $RELEASE"
-        #         echo "Complete Contract Status: $CONTRACT"
-        #     fi
-        # fi
-        # --- END OLD LOGIC ---
+        The below block only checks privacy and is redundant now
+        STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
+        if  [ "$STATUS" == "COMPLETED"  ]; then
+            NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
+            echo " "
+            echo "AI Running Status: $STATUS"
+            if [ -z "$NEW_ISSUES" ] ||  [ "$NEW_ISSUES" == null ]; then
+                echo "No new issues detected. Build passed."
+            else
+                echo "Build failed with new issues." 
+                echo "Complete Privacy Status: $PRIVACY"
+                echo "Complete Security Status: $SECURITY"
+                echo "Complete Governance Status $GOVERNANCE"
+                echo "Complete Version Status: $VERSION"
+                echo "Complete Release Status: $RELEASE"
+                echo "Complete Contract Status: $CONTRACT"
+            fi
+        fi
+        --- END OLD LOGIC ---
 
         if [[ "$STATUS" == "FAILED" ]]; then
             echo "Error: API Privacy failed for Run ID $RUN_ID"
