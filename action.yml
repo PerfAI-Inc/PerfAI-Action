@@ -28,9 +28,9 @@ inputs:
   orgId:
     description: 'ORG ID'
     required: true  
-  services:
-    description: 'Services Name'
-    required: true
+  # services:
+  #   description: 'Services Name'
+  #   required: true
   wait-for-completion:
     description: 'To wait till PerfAI tests complete, set to `true`'
     required: false
@@ -67,5 +67,5 @@ runs:
       
     - name: Run multiple-service-deploy.sh
       run: |
-        ${GITHUB_ACTION_PATH}/multiple-service-deploy.sh --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}" --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --orgId "${{ inputs.orgId }}" --services "${{ inputs.services }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
+        ${GITHUB_ACTION_PATH}/multiple-service-deploy.sh --username "${{ inputs.username }}" --password "${{ inputs.password }}" --openApiUrl "${{ inputs.openApiUrl }}" --basePath "${{ inputs.basePath }}" --appId "${{ inputs.appId }}" --label "${{ inputs.label }}" --orgId "${{ inputs.orgId }}" --wait-for-completion "${{ inputs.wait-for-completion }}" --fail-on-new-leaks "${{ inputs.fail-on-new-leaks }}" --authenticationUrl1 "${{ inputs.authenticationUrl1 }}" --authenticationBody1 "${{ inputs.authenticationBody1 }}" --authorizationHeaders1 "${{ inputs.authorizationHeaders1 }}" --authenticationUrl2 "${{ inputs.authenticationUrl2 }}" --authenticationBody2 "${{ inputs.authenticationBody2 }}" --authorizationHeaders2 "${{ inputs.authorizationHeaders2 }}"
       shell: bash
