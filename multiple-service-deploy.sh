@@ -147,7 +147,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
 
        ########### Debug raw output ###########
         echo "DEBUG: Raw STATUS_RESPONSE:"
-        echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
+        # echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
         # echo 4
 
         
