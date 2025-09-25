@@ -130,25 +130,25 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
     # echo "DEBUG: ORG_ID = $ORG_ID"
     
     STATUS="PROCESSING"
-    echo 1
+    # echo 1
 
 
     
 ### Step 4: Poll the status of the AI run until completion ###
     while [[ "$STATUS" == "PROCESSING" ]]; do
-        echo 2
+        # echo 2
         
         # Check the status of the API Privacy Tests
         STATUS_RESPONSE=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/api-catalog/apps/all_service_run_status?run_id=$RUN_ID" \
           --header "x-org-id: $ORG_ID" \
           --header "Authorization: Bearer $ACCESS_TOKEN")    
-        echo 3
+        # echo 3
 
 
        ########### Debug raw output ###########
         echo "DEBUG: Raw STATUS_RESPONSE:"
         echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
-        echo 4
+        # echo 4
 
         
       # Handle empty or null STATUS_RESPONSE
@@ -169,7 +169,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         
         # Set STATUS to "PROCESSING" if PRIVACY status is null or empty
         STATUS=$(echo "$PRIVACY" | jq -r '.status')
-        echo 5
+        # echo 5
         # echo "status: $STATUS"
         # echo " "
         
@@ -178,7 +178,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
 
             NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
             NEW_ISSUES_DETECTED=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssuesDetected')
-            echo 6
+            # echo 6
             
             echo " "
             echo "AI Running Status: $STATUS"
@@ -193,7 +193,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
               echo "Complete Version Status: $VERSION"
               echo "Complete Release Status: $RELEASE"
               echo "Complete Contract Status: $CONTRACT"
-              echo 7
+              # echo 7
 #            exit 1
          fi
     fi 
