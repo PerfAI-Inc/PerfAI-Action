@@ -126,11 +126,11 @@ fi
 ### Step 3: Check the wait-for-completion flag ###
 if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
     echo "Waiting for API Privacy Tests to complete..."
-    echo "DEBUG: Run ID = $RUN_ID"
-    echo "DEBUG: ORG_ID = $ORG_ID"
+    # echo "DEBUG: Run ID = $RUN_ID"
+    # echo "DEBUG: ORG_ID = $ORG_ID"
     
     STATUS="PROCESSING"
-    echo " "
+    # echo " "
 
 
     
@@ -145,8 +145,8 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
 
 
        ########### Debug raw output ###########
-        echo "DEBUG: Raw STATUS_RESPONSE:"
-        echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
+        # echo "DEBUG: Raw STATUS_RESPONSE:"
+        # echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
 
 
 
