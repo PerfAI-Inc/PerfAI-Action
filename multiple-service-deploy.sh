@@ -126,92 +126,65 @@ fi
 ### Step 3: Check the wait-for-completion flag ###
 if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
     echo "Waiting for API Privacy Tests to complete..."
-    # echo "DEBUG: Run ID = $RUN_ID"
-    # echo "DEBUG: ORG_ID = $ORG_ID"
-    
+
     STATUS="PROCESSING"
-    # echo 1
+    LAST_STATUS=""
 
-
-    
-### Step 4: Poll the status of the AI run until completion ###
     while [[ "$STATUS" == "PROCESSING" ]]; do
-        # echo " 1 "
-         sleep 15
-        
-        # Check the status of the API Privacy Tests
-        STATUS_RESPONSE=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/api-catalog/apps/all_service_run_status?run_id=$RUN_ID" \
+        sleep 15
+
+        STATUS_RESPONSE=$(curl -s --location --request GET \
+          "https://api.perfai.ai/api/v1/api-catalog/apps/all_service_run_status?run_id=$RUN_ID" \
           --header "x-org-id: $ORG_ID" \
-          --header "Authorization: Bearer $ACCESS_TOKEN")    
+          --header "Authorization: Bearer $ACCESS_TOKEN")
 
-
-       ########### Debug raw output ###########
-        # echo "DEBUG: Raw STATUS_RESPONSE:"
-        # echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
-        # echo 4
-        echo "$STATUS_RESPONSE" | jq '.status'
-        
-        
-      # Handle empty or null STATUS_RESPONSE
+        # Handle empty or null response
         if [ -z "$STATUS_RESPONSE" ] || [ "$STATUS_RESPONSE" == "null" ]; then
             echo "Error: Received empty response from the API."
             exit 1
         fi
-       
-       # echo $STATUS_RESPONSE
-    
-        # Extract fields with default values to handle null cas
-        PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')
-        SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security')
-        GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance')
-        VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')
-        RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')
-        CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract')
-        
-        # Set STATUS to "PROCESSING" if PRIVACY status is null or empty
-        STATUS=$(echo "$PRIVACY" | jq -r '.status')
-        # echo 5
-        # echo "status: $STATUS"
-        # echo " "
-        
-        # Check if STATUS is completed and handle issues
-        if  [ "$STATUS" == "COMPLETED"  ]; then
 
-            NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues[]')
-            NEW_ISSUES_DETECTED=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssuesDetected')
-            # echo 6
-            
-            echo " "
+        # Prefer top-level .status
+        STATUS=$(echo "$STATUS_RESPONSE" | jq -r '.status')
+
+        # Print only when status changes
+        if [ "$STATUS" != "$LAST_STATUS" ]; then
             echo "AI Running Status: $STATUS"
+        fi
+        LAST_STATUS="$STATUS"
+    done
 
-            if [ -z "$NEW_ISSUES" ] ||  [ "$NEW_ISSUES" == null ]; then
-              echo "No new issues detected. Build passed."
-          else
-              echo "Build failed with new issues." 
-              echo "Complete Privacy Status: $PRIVACY"
-              echo "Complete Security Status: $SECURITY"
-              echo "Complete Governance Status $GOVERNANCE"
-              echo "Complete Version Status: $VERSION"
-              echo "Complete Release Status: $RELEASE"
-              echo "Complete Contract Status: $CONTRACT"
-              # echo 7
-#            exit 1
-         fi
-    fi 
+    # Extract fields
+    PRIVACY=$(echo "$STATUS_RESPONSE" | jq -r '.privacy')
+    SECURITY=$(echo "$STATUS_RESPONSE" | jq -r '.security')
+    GOVERNANCE=$(echo "$STATUS_RESPONSE" | jq -r '.governance')
+    VERSION=$(echo "$STATUS_RESPONSE" | jq -r '.version')
+    RELEASE=$(echo "$STATUS_RESPONSE" | jq -r '.release')
+    CONTRACT=$(echo "$STATUS_RESPONSE" | jq -r '.contract')
 
-   # echo "AI Running Status: $STATUS"
+    if [ "$STATUS" == "COMPLETED" ]; then
+        NEW_ISSUES=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssues // [] | .[]?')
+        NEW_ISSUES_DETECTED=$(echo "$STATUS_RESPONSE" | jq -r '.privacy.newIssuesDetected')
 
-    # If the AI run fails, exit with an error
-    if [[ "$STATUS" == "FAILED" ]]; then
-      echo "Error: API Privacy failed for Run ID $RUN_ID"
-      exit 1
+        if [ -z "$NEW_ISSUES" ] || [ "$NEW_ISSUES" == "null" ]; then
+            echo "No new issues detected. ✅ Build passed."
+        else
+            echo "Build failed with new issues. ❌"
+            echo "Complete Privacy Status: $PRIVACY"
+            echo "Complete Security Status: $SECURITY"
+            echo "Complete Governance Status: $GOVERNANCE"
+            echo "Complete Version Status: $VERSION"
+            echo "Complete Release Status: $RELEASE"
+            echo "Complete Contract Status: $CONTRACT"
+            exit 1
+        fi
+    elif [ "$STATUS" == "FAILED" ]; then
+        echo "Error: API Privacy failed for Run ID $RUN_ID"
+        exit 1
     fi
-  done
 
-    
-    # Once the status is no longer "in_progress", assume it completed
-  echo "API Privacy Tests for API ID $APP_ID has completed successfully!"
+    echo "API Privacy Tests for API ID $APP_ID finished with status: $STATUS"
 else
-  echo "API Privacy Tests triggered. Run ID: $RUN_ID. Exiting without waiting for completion."
-  exit 1  
+    echo "API Privacy Tests triggered. Run ID: $RUN_ID. Exiting without waiting for completion."
+    exit 0
 fi
