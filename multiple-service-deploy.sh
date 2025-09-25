@@ -142,12 +142,11 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         STATUS_RESPONSE=$(curl -s --location --request GET "https://api.perfai.ai/api/v1/api-catalog/apps/all_service_run_status?run_id=$RUN_ID" \
           --header "x-org-id: $ORG_ID" \
           --header "Authorization: Bearer $ACCESS_TOKEN")    
-        echo 3
 
 
        ########### Debug raw output ###########
         echo "DEBUG: Raw STATUS_RESPONSE:"
-        # echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
+        echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
         # echo 4
 
         
