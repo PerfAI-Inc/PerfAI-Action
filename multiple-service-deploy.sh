@@ -126,9 +126,14 @@ fi
 ### Step 3: Check the wait-for-completion flag ###
 if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
     echo "Waiting for API Privacy Tests to complete..."
-
+    echo "DEBUG: Run ID = $RUN_ID"
+    echo "DEBUG: ORG_ID = $ORG_ID"
+    
     STATUS="PROCESSING"
+    echo " "
 
+
+    
 ### Step 4: Poll the status of the AI run until completion ###
     while [[ "$STATUS" == "PROCESSING" ]]; do
         
@@ -137,6 +142,15 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
           --header "x-org-id: $ORG_ID" \
           --header "Authorization: Bearer $ACCESS_TOKEN")    
 
+
+
+       ########### Debug raw output ###########
+        echo "DEBUG: Raw STATUS_RESPONSE:"
+        echo "$STATUS_RESPONSE" | jq . || echo "$STATUS_RESPONSE"
+
+
+
+        
       # Handle empty or null STATUS_RESPONSE
         if [ -z "$STATUS_RESPONSE" ] || [ "$STATUS_RESPONSE" == "null" ]; then
             echo "Error: Received empty response from the API."
