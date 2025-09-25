@@ -169,7 +169,7 @@ if [ "$WAIT_FOR_COMPLETION" == "true" ]; then
         if [ -z "$NEW_ISSUES" ] || [ "$NEW_ISSUES" == "null" ]; then
             echo "No new issues detected. ✅ Build passed."
         else
-            echo "Build failed with new issues. ❌"
+            echo "Build failed with new issues."
             echo "Complete Privacy Status: $PRIVACY"
             echo "Complete Security Status: $SECURITY"
             echo "Complete Governance Status: $GOVERNANCE"
