@@ -82,4 +82,4 @@ present by default on GitHub-hosted runners).
 
 ---
 
-[Terms of Use](https://www.perfai.ai/terms-of-use) · [Privacy Policy](https://www.perfai.ai/privacy-policy)
+[Terms of Use](https://perfai.ai/terms) · [Privacy Policy](https://perfai.ai/privacy)
