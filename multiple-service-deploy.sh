@@ -5,7 +5,7 @@ WAIT_FOR_COMPLETION=true
 FAIL_ON_NEW_LEAKS=false
 
 # Parse the input arguments
-TEMP=$(getopt -n "$0" -a -l "hostname:,username:,password:,openApiUrl:,basePath:,orgId:,catalogId:,label:,wait-for-completion:,fail-on-new-leaks:,authenticationUrl1:,authenticationBody1:,authorizationHeaders1:,authenticationUrl2:,authenticationBody2:,authorizationHeaders2:,appUrl:" -- -- "$@")
+TEMP=$(getopt -n "$0" -a -l "hostname:,username:,password:,openApiUrl:,basePath:,orgId:,catalogId:,appId:,label:,wait-for-completion:,fail-on-new-leaks:,authenticationUrl1:,authenticationBody1:,authorizationHeaders1:,authenticationUrl2:,authenticationBody2:,authorizationHeaders2:,appUrl:" -- -- "$@")
 
 [ $? -eq 0 ] || exit
 
@@ -21,6 +21,7 @@ do
         --basePath) BASE_PATH="$2"; shift;;  
         --orgId) ORG_ID="$2"; shift;;
         --catalogId) CATALOG_ID="$2"; shift;;
+        --appId) APP_ID="$2"; shift;;
         --label) LABEL="$2"; shift;;
         --wait-for-completion) WAIT_FOR_COMPLETION="$2"; shift;;
         --fail-on-new-leaks) FAIL_ON_NEW_LEAKS="$2"; shift;;
