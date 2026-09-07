@@ -1,9 +1,9 @@
-name: Perfai Actions
-description: Active Performance for APIs (public, mobile, & web)
+name: Perfai Security
+description: Find & fix broken access control in AI-coded apps. Autonomously.
 author: Perfai, Inc.
 
 branding:
-  icon: trending-up
+  icon: shield
   color: red
 
 inputs:
