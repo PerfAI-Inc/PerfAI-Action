@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Perfai Security
-        uses: PerfAI-Inc/Perfai-Security@v1.5
+        uses: PerfAI-Inc/Perfai-Security@v1.7
         with:
           username: ${{ secrets.PERFAI_USERNAME }}
           password: ${{ secrets.PERFAI_PASSWORD }}
